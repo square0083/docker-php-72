@@ -8,6 +8,9 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && php -r "unlink('composer-setup.php');" \
-    && mv composer.phar /usr/local/bin/composer
+    && mv composer.phar /usr/local/bin/composer \
+    && echo "extension=redis.so" >> /usr/local/etc/php/conf.d/redis.ini \
+    && echo "extension=memcached.so" >> /usr/local/etc/php/conf.d/memcached.ini \
+    && echo "extension=msgpack.so" >> /usr/local/etc/php/conf.d/msgpack.ini
 
 EXPOSE "9000"
