@@ -5,7 +5,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
     && apk update \
     && apk upgrade \
-    && apk add --no-cache autoconf make g++ yaml-dev zlib-dev libmemcached-dev curl tzdata libpng-dev && docker-php-ext-install gd pdo pdo_mysql bcmath gearman-dev@testing \
+    && apk add --no-cache autoconf make g++ yaml-dev zlib-dev libmemcached-dev curl tzdata libpng-dev gearman-dev@testing && docker-php-ext-install gd pdo pdo_mysql bcmath \
 
     # add third package
     && pecl install yaml redis mongodb xdebug memcached msgpack \
