@@ -1,4 +1,4 @@
-FROM php:7.2.3-fpm-alpine3.7
+FROM php:7.2.4-fpm-alpine3.7
 MAINTAINER Liang Lei <square0083@gmail.com>
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
@@ -20,9 +20,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
     && unzip gearman-2.0.3.zip && cd pecl-gearman-gearman-2.0.3 && phpize && ./configure && make && make install \
 
     # add php common extensions
-    && echo "extension=redis.so" >> /usr/local/etc/php/conf.d/redis.ini \
-    && echo "extension=memcached.so" >> /usr/local/etc/php/conf.d/memcached.ini \
-    && echo "extension=msgpack.so" >> /usr/local/etc/php/conf.d/msgpack.ini \
-    && echo "extension=gearman.so" >> /usr/local/etc/php/conf.d/gearman.ini
+		&& docker-php-ext-enable redis memcached msgpack gearman
 
 EXPOSE "9000"
